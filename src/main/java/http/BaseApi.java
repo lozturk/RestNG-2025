@@ -24,9 +24,9 @@ public abstract class BaseApi {
                                          .setParam("http.socket.timeout", getConfig().socketTimeout());
 
         this.requestSpecification = RestAssured.given()
-                                               .baseUri(PropertyUtil.getConfig().baseUrl())
+                                               .baseUri(PropertyUtil.getConfig().baseUrl());
                                //                .filter(new AllureRestAssured())
-                                               .config(RestAssured.config().httpClient(httpConfig));
+ //                                              .config(RestAssured.config().httpClient(httpConfig));
 
     }
 
@@ -79,6 +79,7 @@ public abstract class BaseApi {
             case PATCH -> when.patch();
             default -> throw new IllegalArgumentException("Invalid HTTP method type: " + methodType);
         };
+
     }
 
 

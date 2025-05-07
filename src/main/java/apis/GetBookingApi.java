@@ -3,8 +3,7 @@ package apis;
 import http.BaseApi;
 import io.restassured.response.Response;
 
-import static constants.ApiPaths.GET_BOOKING;
-import static constants.ApiPaths.GET_BOOKING_IDS;
+import static constants.ApiPaths.*;
 
 public class GetBookingApi extends BaseApi {
 
