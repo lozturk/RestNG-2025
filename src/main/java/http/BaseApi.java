@@ -50,6 +50,10 @@ public abstract class BaseApi {
         this.requestSpecification.pathParam(paramName, paramValue);
     }
 
+    protected void setHeader(String headerName, String headerValue) {
+        this.requestSpecification.header(headerName, headerValue);
+    }
+
     public BaseApi loggAllRequestData() {
         this.requestSpecification.filter(new RequestLoggingFilter());
         return this;
@@ -81,8 +85,5 @@ public abstract class BaseApi {
         };
 
     }
-
-
-
 
 }
