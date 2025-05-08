@@ -16,7 +16,7 @@ public class UpdateBookingApiTests {
         var updateBookingApiPayload = testDataHelper.getCreatedBookingApiPayload();
         userName = updateBookingApiPayload.get("username").toString();
         return new Object[][]{
-                {updateBookingApiPayload,"1732","admin", "password123"},
+                {updateBookingApiPayload,"1731","admin", "password123"},
                 {updateBookingApiPayload,"1304","admin", "password123"},
         };
     }
@@ -26,6 +26,7 @@ public class UpdateBookingApiTests {
         var updateBookingAndValidateStatusCode = updateBookingApi.updateBooking(updateBookingApiPayload, bookingId, username, password)
                 .then().assertThat().statusCode(200)
                 .and().body("username", is(equalTo(userName)));
+        System.out.println("Update Booking API Response: " + updateBookingAndValidateStatusCode.extract().asString());
     }
 
 

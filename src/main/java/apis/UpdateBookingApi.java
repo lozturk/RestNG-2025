@@ -10,8 +10,6 @@ import static constants.ApiPaths.UPDATE_BOOKING;
 @Slf4j
 public class UpdateBookingApi extends BaseApi {
 
-
-
     public UpdateBookingApi(){
         super();
         super.loggAllRequestData().loggAllResponseData();
@@ -24,18 +22,6 @@ public class UpdateBookingApi extends BaseApi {
         super.setPathParam("bookingId", bookingId);
         super.setBasicAuth(username, password);
         return super.sendRequest(UPDATE_BOOKING.getHttpMethodType());
-
-
-
-
-
-}
-
-
-
-
-
-
-
+    }
 
 }
