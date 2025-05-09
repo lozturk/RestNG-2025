@@ -1,71 +1,51 @@
 import apis.CreateBookingApi;
 import com.github.javafaker.Faker;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import util.ApiRequestHelper;
 import util.TestDataHelper;
+
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import static org.hamcrest.Matchers.*;
 
 public class CreateBookingApiTests {
 
     private CreateBookingApi createBookingApi;
-    private ApiRequestHelper apiRequestHelper;
-    private Faker faker;
+    private final Faker faker = TestDataHelper.getFaker();
 
-    @BeforeTest
-    private void setCreateNewBookingApi() {
-            this.createBookingApi = new CreateBookingApi();
-            this.apiRequestHelper = new ApiRequestHelper();
+    @BeforeClass
+    public void initApi() {
+        this.createBookingApi = new CreateBookingApi();
     }
 
-    // Provide Payload for Create Booking API
-    @DataProvider(name = "provideCreateNewBookingData")
-    public Object[][] provideCreateNewBookingData() {
-        this.faker = TestDataHelper.getFaker();
+    @DataProvider(name = "bookingDataWithForLoop")
+    public Object[][] bookingDataProviderWithLoop() {
+        var faker = this.faker;
+        var name = faker.name();
         var dateFormatter = DateTimeFormatter.ISO_DATE;
-
-        int numberOfTestCases = 1; // Number of test data sets to generate
-        Object[][] testData = new Object[numberOfTestCases][7];
-
-        for (int i = 0; i < numberOfTestCases; i++) {
-            var firstname = faker.name().firstName();
-            var lastName = faker.name().lastName();
-            var totalPrice = faker.number().numberBetween(100, 500);
-            var depositPaid = faker.bool().bool();
-            var additionalNeeds = faker.food().dish();
+        var list = new ArrayList<Object[]>();
+        for (int i = 0; i < 3; i++) {
             var numberOfPlusDays = TestDataHelper.getRandomInt(2);
-
-            testData[i] = new Object[]{
-                    firstname,
-                    lastName,
-                    totalPrice,
-                    depositPaid,
-                    additionalNeeds,
+            var objects = new Object[]{name.firstName(), name.lastName(), faker.bool().bool(),
+                    faker.food().dish(), TestDataHelper.getRandomInt(3),
                     TestDataHelper.getFutureDate(numberOfPlusDays, dateFormatter),
-                    TestDataHelper.getFutureDate(numberOfPlusDays + 4, dateFormatter)
-            };
+                    TestDataHelper.getFutureDate(numberOfPlusDays + 4, dateFormatter)};
+            list.add(objects);
         }
-
-        return testData;
+        return list.toArray(new Object[0][]);
     }
 
-    @Test (description = "Create a new booking and validate HTTP Status code", dataProvider = "provideCreateNewBookingData")
-    public void createNewBookingAndValidateStatusCode(String firstName, String lastName, Integer totalPrice, Boolean depositPaid,
-                                                      String additionalNeeds, String checkInDate, String checkOutDate) {
-        var createBookingPayload = apiRequestHelper
-                .getCreateBookingApiPayload(firstName, lastName, totalPrice, depositPaid, additionalNeeds, checkInDate, checkOutDate);
-        var createBookingAndValidateStatusCode = createBookingApi
-                .createNewBooking(createBookingPayload)
-                .then().assertThat().statusCode(200)
-                .and().body("bookingid", is(not(equalTo(0))));
+    @Test(description = "Create a new booking and validate HTTP Status code", dataProvider = "bookingDataWithForLoop")
+    public void createAndValidateStatusCode(String firstName, String lastName, Boolean depositPaid,
+                                            String additionalNeeds, Integer totalPrice, String checkInDate, String checkOutDate) {
+        var createBookingPayload = ApiRequestHelper.getCreateBookingApiRequest(firstName, lastName, totalPrice,
+                depositPaid, additionalNeeds, checkInDate, checkOutDate);
+        this.createBookingApi.createNewBooking(createBookingPayload)
+                             .then().assertThat().statusCode(200)
+                             .and().body("bookingid", is(not(equalTo(0))));
+
     }
-
-
-
-
-
-
-
 }

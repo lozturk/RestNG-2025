@@ -6,31 +6,23 @@ import java.util.Map;
 public class ApiRequestHelper {
 
 
+    public static Map<String, Object> getCreateBookingApiRequest(String firstName, String lastName,
+                                                                 int totalPrice, boolean depositPaid,
+                                                                 String additionalNeeds,
+                                                                 String checkInDate, String checkOutDate) {
 
-    public Map<String, Object> getCreateBookingApiPayload(String firstname, String lastname, int totalprice, boolean depositpaid,
-                                                          String additionalneeds, String checkin, String checkout) {
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("firstname", firstName);
+        requestBody.put("lastname", lastName);
+        requestBody.put("totalprice", totalPrice);
+        requestBody.put("depositpaid", depositPaid);
+        requestBody.put("additionalneeds", additionalNeeds);
 
-        Map<String, Object> createBookingPayload = new HashMap<>();
-
-        createBookingPayload.put("firstname", firstname);
-        createBookingPayload.put("lastname", lastname);
-        createBookingPayload.put("totalprice", totalprice);
-        createBookingPayload.put("depositpaid", depositpaid);
-        createBookingPayload.put("additionalneeds", additionalneeds);
-
-        Map <String, Object> bookingdates = new HashMap<>();
-        bookingdates.put("checkin", checkin);
-        bookingdates.put("checkout", checkout);
-
-        createBookingPayload.put("bookingdates", bookingdates);
-
-        return createBookingPayload;
-
+        //Create booking date map
+        Map<String, Object> bookingDatesMap = new HashMap<>();
+        bookingDatesMap.put("checkin", checkInDate);
+        bookingDatesMap.put("checkout", checkOutDate);
+        requestBody.put("bookingdates", bookingDatesMap);
+        return requestBody;
     }
-
-
-
-
-
-
 }

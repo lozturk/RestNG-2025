@@ -1,13 +1,9 @@
 import apis.GetBookingApi;
-import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class GetBookingApiTests {
-
-    private Response response;
 
     @Parameters("testParam")
     @Test(description = "Basic HTTP Status check for get booking ids API")
@@ -21,6 +17,5 @@ public class GetBookingApiTests {
     public void validateStatusCodeForGetBookingByIdApi() {
         var getBookingByIdApiResponse = new GetBookingApi().getBookingById(20)
                                                            .then().assertThat().statusCode(200);
-
     }
 }
