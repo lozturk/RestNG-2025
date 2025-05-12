@@ -13,7 +13,7 @@ public class BaseTest {
         var faker = this.faker;
         var name = faker.name();
         var dateFormatter = DateTimeFormatter.ISO_DATE;
-        return IntStream.range(0, 1)
+        return IntStream.range(0, 5)
                 .mapToObj(i -> {
                     var numberOfPlusDays = TestDataHelper.getRandomInt(2);
                     return new Object[]{name.firstName(), name.lastName(), faker.bool().bool(),
