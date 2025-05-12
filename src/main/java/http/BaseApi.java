@@ -1,6 +1,7 @@
 package http;
 
 import config.PropertyUtil;
+import io.qameta.allure.restassured.*;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.filter.log.LogDetail;
@@ -24,9 +25,9 @@ public abstract class BaseApi {
                                          .setParam("http.socket.timeout", getConfig().socketTimeout());
 
         this.requestSpecification = RestAssured.given()
-                                               .baseUri(PropertyUtil.getConfig().baseUrl());
-                               //                .filter(new AllureRestAssured())
- //                                              .config(RestAssured.config().httpClient(httpConfig));
+                                               .baseUri(PropertyUtil.getConfig().baseUrl())
+                .filter(new AllureRestAssured());
+
 
     }
 
