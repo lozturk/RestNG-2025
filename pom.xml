@@ -125,7 +125,7 @@
                     <suiteXmlFiles>
                         <!--suppress UnresolvedMavenProperty -->
                         <suiteXmlFile>
-                            src/test/resources/suites/testng.xml
+                            ${suiteXmlFile}
                         </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
