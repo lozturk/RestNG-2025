@@ -4,10 +4,11 @@
     <test verbose="2" preserve-order="true" name="Parallel Test" parallel="methods">
         <parameter name="testParam" value="Initial Test Value"/>
         <classes>
-<!--            <class name="UpdateBookingApiTests"/>-->
             <class name="GetBookingApiTests"/>
-<!--            <class name="DeleteBookingApiTests"/>-->
-<!--            <class name="CreateBookingApiTests"/>-->
+            <class name="CreateBookingApiTests"/>
+            <class name="UpdateBookingApiTests"/>
+            <class name="DeleteBookingApiTests"/>
+            <class name="PartialUpdateBookingApiTests"/>
         </classes>
     </test>
 

@@ -25,4 +25,14 @@ public class ApiRequestHelper {
         requestBody.put("bookingdates", bookingDatesMap);
         return requestBody;
     }
+
+    public static Map<String, Object> getPartialUpdateBookingPayload(String firstName, String lastName) {
+
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("firstname", firstName);
+        requestBody.put("lastname", lastName);
+
+        return requestBody;
+    }
+
 }

@@ -28,7 +28,8 @@ public enum ApiPaths {
     GET_BOOKING_IDS("/booking", GET),
     CREATE_BOOKING("/booking", POST),
     DELETE_BOOKING("/booking/{bookingId}", DELETE),
-    UPDATE_BOOKING("/booking/{bookingId}", PUT);
+    UPDATE_BOOKING("/booking/{bookingId}", PUT),
+    PARTIAL_UPDATE_BOOKING("/booking/{bookingId}", PATCH);
 
     /**
      * Access the API path and HTTP method type with Lombok {@link Getter} annotation.

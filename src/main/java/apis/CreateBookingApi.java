@@ -1,6 +1,7 @@
 package apis;
 
 import http.BaseApi;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import pojo.request.CreateBookingRequest;
@@ -13,7 +14,9 @@ public class CreateBookingApi extends BaseApi {
 
     public CreateBookingApi() {
         super();
-        super.loggAllRequestData().loggAllResponseData();
+        super.loggAllSpecificRequestDetail(LogDetail.METHOD)
+             .loggAllSpecificRequestDetail(LogDetail.BODY)
+             .loggAllResponseData();
         super.setContentType(ContentType.JSON);
     }
 

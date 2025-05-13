@@ -14,7 +14,9 @@ public class UpdateBookingApi extends BaseApi {
 
     public UpdateBookingApi() {
         super();
-        super.loggAllSpecificRequestDetail(LogDetail.BODY).loggAllResponseData();
+        super.loggAllSpecificRequestDetail(LogDetail.METHOD)
+             .loggAllSpecificRequestDetail(LogDetail.BODY)
+             .loggAllResponseData();
         super.setContentType(ContentType.JSON);
     }
 
