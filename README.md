@@ -1,4 +1,4 @@
-# RestNG-java-2025
+# RestNG-2025
 
 ## Overview
 This project demonstrates API testing using RestAssured in Java. It includes test cases for validating API responses, headers, and JSON payloads.
