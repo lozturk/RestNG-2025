@@ -2,10 +2,19 @@
 
 ## Overview
 This project demonstrates API testing using RestAssured in Java. It includes test cases for validating API responses, headers, and JSON payloads.
+It is designed to be easily extendable and maintainable, making it suitable for both beginners and experienced developers.
 
 ## Project Structure
 
 - **`src/main/java`**: Contains the main application code.
+  - **`apis`**: Contains API-related classes for handling requests and responses.
+    - `CreateBookingApi.java`: Contains methods specifically for creating new bookings, including request payload construction.
+    - `DeleteBookingApi.java`: Contains methods specifically for deleting bookings by ID, including authentication setup.
+    - `GetBookingApi.java`: Contains methods specifically for retrieving booking details by ID, including request construction.
+    - `UpdateBookingApi.java`: Contains methods specifically for updating existing bookings, including request payload construction.
+    - `PartialUpdateBookingApi.java`: Contains methods specifically for partially updating bookings, including request payload construction.
+  - **`http`**: Contains base api class for configuring and sending HTTP requests, including logging and authentication.
+    - `BaseApi.java`: Contains common methods and configurations for API requests, such as base URL and authentication.
 - **`src/test/java`**: Contains the test cases for API testing.
   - `BaseTest.java`: Sets up base configurations and provides data providers for test cases.
   - `CRUDTests.java`: Implements create, retrieve, update, and delete (CRUD) operations and validates API responses.
@@ -13,6 +22,8 @@ This project demonstrates API testing using RestAssured in Java. It includes tes
   - `UpdateBookingApiTests.java`: Tests for updating existing bookings and validating HTTP status codes.
   - `PartialUpdateBookingApiTests.java`: Tests for partially updating bookings and validating responses.
   - `GetBookingApiTests.java`: Tests for retrieving booking details by ID and validating HTTP status codes.
+  - `DeleteBookingApiTests.java`: Tests for deleting bookings and validating HTTP status codes.
+
 
 ## Features
 - Validate API responses
